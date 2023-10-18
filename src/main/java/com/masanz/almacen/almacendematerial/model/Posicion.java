@@ -3,81 +3,86 @@ package com.masanz.almacen.almacendematerial.model;
 import javafx.geometry.Pos;
 
 public class Posicion {
-    private static String letras = "";
+    private static String letras = "ABCDE";
     private char fila;
     private int columna;
 
-    public Posicion(){
-
-    }
+//    public Posicion(){
+//
+//    }
 
     public Posicion(char letra,int columna){
+        fila=letra;
+        this.columna=columna;
 
     }
 
-    public Posicion(int a, int b){
+//    public Posicion(int a, int b){
+//
+//    }
 
-    }
-
-    public Posicion(String letras){
-
-    }
+//    public Posicion(String letras){
+//
+//    }
 
     public char getFila(){
-        return 0;
+        return fila;
     }
 
-    public int getFilaNumber(int filaNumber){
-        return 0;
+    public int getFilaNumber(){
+        return letras.indexOf(fila,0);
     }
 
     public void setFila(char fila){
-
+        this.fila=fila;
     }
 
     public void setFilaNumber(int filaNumber){
-
+        this.fila=letras.charAt(filaNumber-1);
     }
 
     public void setFilaColumnaNumbers(int fila,int columna){
-
+        setFilaNumber(fila);
+        setColumna(columna);
     }
-    public String getLetras(){
-        return null;
+    public static String getLetras(){
+        return letras;
     }
 
     public int getColumna(){
-        return 0;
+        return columna;
     }
 
-    public void setColumna(){
-
+    public void setColumna(int columna){
+        this.columna=columna;
     }
 
-    public int filaToInt(char letras){
-        return 0;
-        /*REVISAR SI ESTÁ BIEN*/
+    private int filaToInt(char fila){
+        return letras.indexOf(fila,0)+1;
     }
 
-    public char filaToChar(int fila){
-        return 0;
-        /*REVISAR SI ESTÁ BIEN*/
-        /*REVISAR SI ESTÁ BIEN*/
+    private char filaToChar(int fila){
+        return letras.charAt(fila-1);
     }
 
-    public boolean equals(Object fila){
-        return false;
+    public boolean equals(Object o){
+        Posicion p = (Posicion) o;
+        return p.fila == fila && p.columna == columna;
     }
 
     public int hashCode(){
-        return 0;
+        return filaToInt(fila) * letras.length() + columna;
+        /**/
+        /*No hace falta, hay identificadores de java*/
     }
 
     public String toString(){
-        return null;
+        StringBuilder sb= new StringBuilder(fila);
+        sb.append(columna);
+        return sb.toString();
     }
 
-    public int compareTo(Posicion posicion){
-        return 0;
+    public int compareTo(Posicion p){
+        return p.hashCode()-hashCode();
     }
 }
