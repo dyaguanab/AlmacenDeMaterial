@@ -1,8 +1,8 @@
-module com.example.almacen {
+module com.masanz.almacen.almacendematerial {
     requires javafx.controls;
     requires javafx.fxml;
             
                             
-    opens com.example.almacen to javafx.fxml;
-    exports com.example.almacen;
+    opens com.masanz.almacen.almacendematerial to javafx.fxml;
+    exports com.masanz.almacen.almacendematerial;
 }
