@@ -13,16 +13,18 @@ public class Armario {
     public Armario (){
 
     }
+
     public int getFilas(){
-        return 0;
+        return FILAS;
     }
 
     public int getColumnas(){
-        return 0;
+        return COLUMNAS;
     }
 
-    public Celda getCelda(int filas,int columas){
-        return null;
+    public Celda getCelda(int fila,int columa){
+        return celdas[fila][columa];
+        //REVISAR
     }
 
     public int getEspacioLibre(Posicion posicion){
@@ -32,6 +34,7 @@ public class Armario {
     public void meter(Posicion posicion,Articulo articulo){
         return;
     }
+
     public int getOCupacionCelda(Posicion posicion){
         return 0;
     }

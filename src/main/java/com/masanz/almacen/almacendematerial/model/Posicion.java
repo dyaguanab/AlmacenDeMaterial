@@ -72,7 +72,7 @@ public class Posicion {
 
     public int hashCode(){
         return filaToInt(fila) * letras.length() + columna;
-        /**/
+
         /*No hace falta, hay identificadores de java*/
     }
 

@@ -17,8 +17,8 @@ public class Salida {
 
     }
 
-    public static void mostrarOpciones(String[] string){}
-    /*Duda con el nombre*/
+    public static void mostrarOpciones(String[] s){}
+
 
     public static void mostrarError(){}
 

@@ -8,26 +8,26 @@ import java.util.Map;
 public class GestorAlmacen {
 
     private static int ESPACIOS_CELDA;
+
     private Armario armario;
 
     public GestorAlmacen(){
-
+        ESPACIOS_CELDA=0;
+        armario=null;
+        /*  */
     }
 
     public Armario getArmario(){
-        return null;
+        return armario;
     }
 
     public int getEspaciosCeldas(){
-        return 0;
+        return ESPACIOS_CELDA;
     }
 
     public int getFilas(){
         return 0;
-    }
-
-    public int getColumnas(){
-        return 0;
+        //TODO
     }
 
     public boolean meterArticulo(Articulo articulo){
@@ -43,7 +43,7 @@ public class GestorAlmacen {
         return null;
     }
 
-    public int getOcupacionCelda(Posicion posicion){
+    public int getOcupacionCelda(Posicion p){
         return 0;
     }
 

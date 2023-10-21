@@ -7,10 +7,12 @@ public class MenuListados {
     private GestorAlmacen gestorAlmacen;
 
     public MenuListados(GestorAlmacen gestorAlmacen){
-
+        this.gestorAlmacen=gestorAlmacen;
     }
 
-    public void run(){}
+    public void run(){
+
+    }
 
     public void articulosPorTipoPrecio(){
 

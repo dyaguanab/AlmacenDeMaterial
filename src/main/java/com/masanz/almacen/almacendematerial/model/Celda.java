@@ -7,22 +7,21 @@ public class Celda {
 
     private int espacio = 0;
     private List<Articulo> lista;
-    /*Revisar*/
 
     public Celda(int espacio){
-
+        this.espacio = espacio;
     }
 
     public List<Articulo> getLista(){
-        return null;
+        return lista;
     }
 
     public void setLista(List<Articulo> lista){
-
+        this.lista=lista;
     }
 
-    public void meter(Articulo articulo){
-
+    public void meter(Articulo a){
+        //TODO
     }
 
     public int getEspacioLibre(){
@@ -33,15 +32,18 @@ public class Celda {
         return 0;
     }
 
-    public boolean estaArticulo(Articulo articulo){
+    public boolean estaArticulo(Articulo a){
+        //TODO
         return false;
     }
 
     public boolean existeIdArticulo(String string){
+        //TODO
         return false;
     }
 
     public Articulo getArticulo(String string){
+        //TODO
         return null;
     }
 

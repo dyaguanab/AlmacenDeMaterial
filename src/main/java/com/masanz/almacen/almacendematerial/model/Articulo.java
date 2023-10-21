@@ -10,67 +10,74 @@ public class Articulo {
     private LocalDate fechaAdquisicion;
     private double precio;
 
-    public Articulo(){
+//    public Articulo(){
+//
+//    }
 
-    }
+//    public Articulo(String id){
+//        this.id = id;
+//    }
 
-    public Articulo(String id){
 
-    }
 
-    public Articulo(String id, ETipoArticulo tipo, int espacio, LocalDate fechaAdquisicion, double precio){
-
-    }
-
-    public boolean equals(Object object){
-        return false;
+    public boolean equals(Object o){
+        Articulo a = (Articulo) o;
+        return a.fechaAdquisicion == fechaAdquisicion && a.id == id &&
+                a.tipo==tipo && a.espacio==espacio && a.precio==precio;
     }
 
     public int hashCode(){
         return 0;
+        /*Identificadores de JAVA*/
     }
 
     public String toString(){
         return null;
+        //TODO
     }
 
     public String getId(){
-        return null;
+        return id;
     }
 
     public void setId(String id){
-
+        this.id=id;
+        /*Al declarar los atributos en constructor no haría falta aquí*/
     }
 
     public ETipoArticulo getTipo(){
-        return null;
+        return tipo;
     }
 
     public void setTipo(ETipoArticulo tipo){
-
+        this.tipo=tipo;
+        /**/
     }
 
     public int getEspacio(){
-        return 0;
+        return espacio;
     }
 
     public void setEspacio(int espacio){
-
+        this.espacio=espacio;
+        /**/
     }
 
     public LocalDate getFechaAdquisicion(){
-        return null;
+        return fechaAdquisicion;
     }
 
     public void setFechaAdquisicion(LocalDate fechaAdquisicion){
-
+        this.fechaAdquisicion=fechaAdquisicion;
+        /**/
     }
 
     public double getPrecio(){
-        return 0;
+        return precio;
     }
 
     public void setPrecio(double precio){
-
+        this.precio=precio;
+        /**/
     }
 }
