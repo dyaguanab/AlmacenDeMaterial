@@ -7,14 +7,12 @@ import java.util.Map;
 
 public class GestorAlmacen {
 
-    private static int ESPACIOS_CELDA;
+    private static final int ESPACIOS_CELDA=4;
 
     private Armario armario;
 
     public GestorAlmacen(){
-        ESPACIOS_CELDA=0;
-        armario=null;
-        /*  */
+        this.armario=new Armario();
     }
 
     public Armario getArmario(){

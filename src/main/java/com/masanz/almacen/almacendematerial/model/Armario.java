@@ -1,5 +1,8 @@
 package com.masanz.almacen.almacendematerial.model;
 
+import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +11,10 @@ public class Armario {
     public static final int COLUMNAS = 4;
     public static final int ESPACIOS_X_CELDA = 4;
 
-    private Celda[][] celdas = new Celda[FILAS][COLUMNAS];
+    private Celda[][] celdas;
 
     public Armario (){
-
+        this.celdas= new Celda[FILAS][COLUMNAS];
     }
 
     public int getFilas(){
@@ -22,44 +25,44 @@ public class Armario {
         return COLUMNAS;
     }
 
-    public Celda getCelda(int fila,int columa){
-        return celdas[fila][columa];
-        //REVISAR
+    public Celda getCelda(int fila,int columna){
+        return celdas[fila][columna];
     }
 
-    public int getEspacioLibre(Posicion posicion){
+    public int getEspacioLibre(Posicion p){
         return 0;
     }
 
-    public void meter(Posicion posicion,Articulo articulo){
-        return;
+    public void meter(Posicion p,Articulo a) throws ExcepcionAmi {
+
     }
 
-    public int getOCupacionCelda(Posicion posicion){
+    public int getOCupacionCelda(Posicion p){
         return 0;
     }
 
-    public List<Articulo> getArticulos(int filas, int columnas){
+    public List<Articulo> getArticulos(int fila, int columna){
         return null;
     }
 
-    public Posicion buscarPosicionConEspacio(int posicion) {
+    public Posicion buscarPosicionConEspacio(int espacio) {
         return null;
     }
 
-    public Posicion getPosicionArticulo(Articulo articulo){
+    public Posicion getPosicionArticulo(Articulo a){
         return null;
     }
 
-    public boolean existeIdArticulo(String string) {
+    public boolean existeIdArticulo(String s) {
         return false;
     }
 
-    public Articulo getArticulo(String string) {
+    public Articulo getArticulo(String s) {
         return null;
     }
 
-    public Map<ETipoArticulo, List <Articulo>> articulosPorTipo(java.util.Comparator<Articulo> comparator, EOrden orden){
+    public Map<ETipoArticulo, List <Articulo>>
+    articulosPorTipo(java.util.Comparator<Articulo> comparator, EOrden orden){
         return null;
     }
 }

@@ -1,15 +1,19 @@
 package com.masanz.almacen.almacendematerial.model;
 
+import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
+
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Celda {
 
-    private int espacio = 0;
+    private int espacio;
     private List<Articulo> lista;
 
     public Celda(int espacio){
         this.espacio = espacio;
+        this.lista = new LinkedList<>(lista);
     }
 
     public List<Articulo> getLista(){
@@ -20,34 +24,59 @@ public class Celda {
         this.lista=lista;
     }
 
-    public void meter(Articulo a){
-        //TODO
+    public void meter(Articulo a) throws ExcepcionAmi{
+        if (estaArticulo(a)) {
+            throw new ExcepcionAmi("Ya existe el articulo introducido");
+        }
+        if (a.getEspacio() <= getEspacioLibre()){
+            lista.add(a);
+        } else {
+            throw new ExcepcionAmi("No hay espacio suficiente para meter el articulo");
+        }
+
     }
 
     public int getEspacioLibre(){
-        return 0;
+        return espacio-getEspacioOcupado();
     }
 
     public int getEspacioOcupado(){
-        return 0;
+        int esp=0;
+        for (int i = 0; i < lista.size(); i++) {
+            Articulo a = lista.get(i)  ;
+            esp += a.getEspacio();
+        }
+        return esp;
     }
 
     public boolean estaArticulo(Articulo a){
-        //TODO
+        if (lista.contains(a)){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public boolean existeIdArticulo(String s){
+        for (int i = 0; i < lista.size(); i++) {
+            Articulo a = lista.get(i);
+            if(a.getId()==s){
+                return true;
+            }
+        }
         return false;
     }
 
-    public boolean existeIdArticulo(String string){
-        //TODO
-        return false;
-    }
-
-    public Articulo getArticulo(String string){
-        //TODO
+    public Articulo getArticulo(String s){
+        for (int i = 0; i < lista.size(); i++) {
+            Articulo a =lista.get(i);
+            if (a.getId()==s);
+            return a;
+        }
         return null;
     }
 
     public Iterator <Articulo> iterator(){
-        return null;
+        return lista.iterator();
     }
 }

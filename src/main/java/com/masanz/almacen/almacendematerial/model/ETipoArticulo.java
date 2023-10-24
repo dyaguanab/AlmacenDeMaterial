@@ -4,7 +4,7 @@ public enum ETipoArticulo {
     MONITOR,
     CPU,
     SCANNER,
-    IMPRESORA
+    IMPRESORA,
+    FAX
 
-    /*TODO*/
 }
