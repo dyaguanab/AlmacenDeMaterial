@@ -30,15 +30,18 @@ public class Armario {
     }
 
     public int getEspacioLibre(Posicion p){
+        /*Hacer primero ocupacion para despues restar como en celda*/
         return 0;
     }
 
     public void meter(Posicion p,Articulo a) throws ExcepcionAmi {
-
+        /*Habrá que crear excepciones como celda*/
     }
 
     public int getOCupacionCelda(Posicion p){
-        return 0;
+        Celda c = new Celda();
+        return c.getEspacioOcupado();
+        //TODO
     }
 
     public List<Articulo> getArticulos(int fila, int columna){
@@ -57,6 +60,7 @@ public class Armario {
         return false;
     }
 
+    /*Hacerlo en base 1, lenguaje humano*/
     public Articulo getArticulo(String s) {
         return null;
     }
