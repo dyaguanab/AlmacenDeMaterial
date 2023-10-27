@@ -2,9 +2,7 @@ package com.masanz.almacen.almacendematerial.model;
 
 import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Armario {
     public static final int FILAS = 5;
@@ -35,7 +33,10 @@ public class Armario {
     }
 
     public void meter(Posicion p,Articulo a) throws ExcepcionAmi {
+        Celda c= celdas[p.getFilaNumber()-1][p.getColumna()-1];
+        c.meter(a);
         /*Habrá que crear excepciones como celda*/
+        //todo
     }
 
     public int getOCupacionCelda(Posicion p){
@@ -49,23 +50,78 @@ public class Armario {
     }
 
     public Posicion buscarPosicionConEspacio(int espacio) {
-        return null;
+        for (int i = FILAS-1; i >=0; i--) {
+            for (int j = COLUMNAS-1; j >=0;j--) {
+                Celda c=celdas[i][j];
+                c.getEspacioLibre();
+                if (c.getEspacioLibre()>=espacio){
+                    Posicion p=new Posicion(i+1,j+1);
+                    return p;
+                }
+            }
+        }return null;
     }
 
     public Posicion getPosicionArticulo(Articulo a){
-        return null;
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                Celda c= celdas[i][j];
+                if(c.estaArticulo(a)){
+                    return new Posicion(i+1,j+1);
+                }
+            }
+        }return null;
     }
 
     public boolean existeIdArticulo(String s) {
-        return false;
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                Celda c= celdas[i][j];
+                if (c.existeIdArticulo(s)){
+                    return true;
+                }
+            }
+        }return false;
     }
 
     public Articulo getArticulo(String s) {
-        return null;
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                Celda c= celdas[i][j];
+                Articulo a= c.getArticulo(s);
+                if (a!=null){
+                    return a;
+                }
+            }
+        }return null;
     }
 
     public Map<ETipoArticulo, List <Articulo>>
-    articulosPorTipo(java.util.Comparator<Articulo> comparator, EOrden orden){
-        return null;
+    articulosPorTipo(java.util.Comparator<Articulo> fyp, EOrden orden){
+        ETipoArticulo[] tipoArticulo =ETipoArticulo.values();
+        Map<ETipoArticulo, List <Articulo>> mp = new HashMap<>();
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                Celda c= celdas[i][j];
+                Iterator<Articulo> ite= c.iterator();
+                while (ite.hasNext()){
+                    Articulo a= ite.next();
+                    ETipoArticulo tipo= a.getTipo();
+                    if (!mp.containsKey(tipo)){
+                        mp.put(tipo,new LinkedList<>());
+                    }
+                    mp.get(tipo).add(a);
+                }
+            }
+        }
+
+        for (int i = 0; i < tipoArticulo.length; i++) {
+            ETipoArticulo tipo = tipoArticulo[i];
+            mp.get(tipo).sort(fyp);
+            if (orden ==EOrden.DESCENDENTE){
+                Collections.reverse(mp.get(tipo));
+            }/**/
+        }
+        return mp;
     }
 }

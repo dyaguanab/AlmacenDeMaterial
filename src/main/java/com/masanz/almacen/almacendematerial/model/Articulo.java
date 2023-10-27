@@ -128,8 +128,8 @@ public class Articulo {
         this.precio=precio;
     }
 
-//    public static void main(String[] args) {
-//        Articulo articulo1 = new Articulo("2", ETipoArticulo.MONITOR, 2, LocalDate.now(), 999.95);
-//        System.out.println(articulo1);
-//    }
+    public static void main(String[] args) {
+        Articulo articulo1 = new Articulo("2", ETipoArticulo.MONITOR, 2, LocalDate.now(), 999.95);
+        System.out.println(articulo1);
+    }
 }

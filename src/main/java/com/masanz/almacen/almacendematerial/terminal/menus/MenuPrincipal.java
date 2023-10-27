@@ -24,7 +24,7 @@ public class MenuPrincipal {
         sb.append("============================================================\n");
         sb.append(" =            Almacén de Material Informático             =\n");
         sb.append("============================================================\n");
-        sb.append("    1.Mostrar armacio del almacén\n");
+        sb.append("    1.Mostrar armario del almacén\n");
         sb.append("    2.Meter articulo en el armario\n");
         sb.append("    3.Consultar articulo\n");
         sb.append("    4.Consultar celda\n");
@@ -37,11 +37,12 @@ public class MenuPrincipal {
 
         do{
             do{
-                System.out.println(sb.toString());
+                String impresion = sb.toString();
+                System.out.print(impresion);
                 dato = scanner.nextInt();
 
                 if (dato<0 || dato>7){
-                    System.out.println("Error. Opción no valida.");
+                    System.out.println("Error. Opción no valida. Intentelo otra vez.");
                 }
             }while (dato <0 || dato >7);
 
@@ -67,7 +68,14 @@ public class MenuPrincipal {
     }
 
     private void mostrarArmario(){
+        StringBuilder sb= new StringBuilder(" ");
+        sb.append("   | hola         ");
+        sb.append("|            2           ");
+        sb.append("|            3           ");
+        sb.append("|            4           \n");
+        String impresion = sb.toString();
 
+        System.out.println(impresion);
     }
 
     private void consultarArticulo(){
