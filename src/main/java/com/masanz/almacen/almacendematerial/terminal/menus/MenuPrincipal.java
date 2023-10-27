@@ -2,6 +2,8 @@ package com.masanz.almacen.almacendematerial.terminal.menus;
 
 import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
 
+import java.util.Scanner;
+
 public class MenuPrincipal {
 
     private GestorAlmacen gestorAlmacen;
@@ -15,6 +17,9 @@ public class MenuPrincipal {
     }
 
     public void run(){
+        Scanner scanner = new Scanner(System.in);
+        int dato;
+
         StringBuilder sb = new StringBuilder();
         sb.append("============================================================\n");
         sb.append(" =            Almacén de Material Informático             =\n");
@@ -29,7 +34,36 @@ public class MenuPrincipal {
         sb.append("    0.Terminar\n");
         sb.append("=============================================================\n");
         sb.append("Opcion [0-7]: ");
-        System.out.println(sb.toString());
+
+        do{
+            do{
+                System.out.println(sb.toString());
+                dato = scanner.nextInt();
+
+                if (dato<0 || dato>7){
+                    System.out.println("Error. Opción no valida.");
+                }
+            }while (dato <0 || dato >7);
+
+                if (dato == 0) {
+                    /**/
+                } else if (dato == 1) {
+                    mostrarArmario();
+                } else if (dato == 2) {
+                    /*Llamar a clase anterior*/
+                } else if (dato == 3) {
+                    consultarArticulo();
+                } else if (dato == 4) {
+                    consultarCelda();
+                } else if (dato == 5) {
+                    menuListados();
+                } else if (dato == 6) {
+                    grabarEstado();
+                } else {
+                    cargarDatos();
+                }
+            }while (dato!=0);
+
     }
 
     private void mostrarArmario(){

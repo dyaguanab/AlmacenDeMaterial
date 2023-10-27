@@ -11,19 +11,33 @@ public class Celda {
     private int espacio;
     private List<Articulo> lista;
 
+    /**
+     * Es el constructor
+     * Se inicializan los atributos
+     */
     public Celda(int espacio){
         this.espacio = espacio;
         this.lista = new LinkedList<>(lista);
     }
 
+    /**
+     * @return Devuelve el valor de lista
+     */
     public List<Articulo> getLista(){
         return lista;
     }
 
+    /**
+     * @param lista Se establece el valor de lista
+     */
     public void setLista(List<Articulo> lista){
         this.lista=lista;
     }
 
+    /**
+     * @param a Se mete el articulo en la celda
+     * @throws ExcepcionAmi Se lanza una excepción
+     */
     public void meter(Articulo a) throws ExcepcionAmi{
         if (estaArticulo(a)) {
             throw new ExcepcionAmi("Ya existe el articulo introducido");
@@ -36,10 +50,16 @@ public class Celda {
 
     }
 
+    /**
+     * @return Se devuelve el espacio libre
+     */
     public int getEspacioLibre(){
         return espacio-getEspacioOcupado();
     }
 
+    /**
+     * @return Se devuelve el espacio ocupado
+     */
     public int getEspacioOcupado(){
         int esp=0;
         for (int i = 0; i < lista.size(); i++) {
@@ -49,6 +69,10 @@ public class Celda {
         return esp;
     }
 
+    /**
+     * @param a Se mira si el articulo está ya en la celda
+     * @return Devuelve true o false, depende si se encuentra el articulo
+     */
     public boolean estaArticulo(Articulo a){
         if (lista.contains(a)){
             return true;
@@ -57,6 +81,10 @@ public class Celda {
         }
     }
 
+    /**
+     * @param s Se pasa el parámetro para ver si está la id del articulo
+     * @return Devuelve true o false, depende de si se encuentra la id
+     */
     public boolean existeIdArticulo(String s){
         for (int i = 0; i < lista.size(); i++) {
             Articulo a = lista.get(i);
@@ -67,6 +95,10 @@ public class Celda {
         return false;
     }
 
+    /**
+     * @param s Se pasa el parámetro s para obtener el articulo
+     * @return Devuelve el articulo en la celda
+     */
     public Articulo getArticulo(String s){
         for (int i = 0; i < lista.size(); i++) {
             Articulo a =lista.get(i);
@@ -76,6 +108,9 @@ public class Celda {
         return null;
     }
 
+    /**
+     * @return
+     */
     public Iterator <Articulo> iterator(){
         return lista.iterator();
     }

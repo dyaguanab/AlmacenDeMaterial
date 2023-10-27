@@ -30,8 +30,8 @@ public class Armario {
     }
 
     public int getEspacioLibre(Posicion p){
-        /*Hacer primero ocupacion para despues restar como en celda*/
-        return 0;
+        Celda c= celdas[p.getFilaNumber()-1][p.getColumna()-1];
+        return c.getEspacioLibre();
     }
 
     public void meter(Posicion p,Articulo a) throws ExcepcionAmi {
@@ -39,13 +39,13 @@ public class Armario {
     }
 
     public int getOCupacionCelda(Posicion p){
-        Celda c = new Celda();
+        Celda c = celdas[p.getFilaNumber()-1][p.getColumna()-1];
         return c.getEspacioOcupado();
-        //TODO
     }
 
     public List<Articulo> getArticulos(int fila, int columna){
-        return null;
+        Celda c= celdas[fila-1][columna-1];
+        return c.getLista();
     }
 
     public Posicion buscarPosicionConEspacio(int espacio) {
@@ -60,7 +60,6 @@ public class Armario {
         return false;
     }
 
-    /*Hacerlo en base 1, lenguaje humano*/
     public Articulo getArticulo(String s) {
         return null;
     }
