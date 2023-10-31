@@ -13,6 +13,11 @@ public class Armario {
 
     public Armario (){
         this.celdas= new Celda[FILAS][COLUMNAS];
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                celdas[i][j]=new Celda(ESPACIOS_X_CELDA);
+            }
+        }
     }
 
     public int getFilas(){

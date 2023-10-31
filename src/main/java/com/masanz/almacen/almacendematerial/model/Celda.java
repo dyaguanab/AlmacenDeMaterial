@@ -17,7 +17,7 @@ public class Celda {
      */
     public Celda(int espacio){
         this.espacio = espacio;
-        this.lista = new LinkedList<>(lista);
+        this.lista = new LinkedList<>();
     }
 
     /**
@@ -113,5 +113,44 @@ public class Celda {
      */
     public Iterator <Articulo> iterator(){
         return lista.iterator();
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb= new StringBuilder("");
+
+        for (int i = 0; i < lista.size(); i++) {
+            Articulo a = lista.get(i);
+            int espacio =a.getEspacio();
+            if (espacio==1){
+                sb.append("_");
+                sb.append(a.getId());
+                sb.append("_");
+            } else if (espacio==2) {
+                sb.append("______");
+                sb.append(a.getId());
+                sb.append("______");
+            } else if (espacio==3) {
+                sb.append("___________");
+                sb.append(a.getId());
+                sb.append("___________");
+            }else if(espacio==4){
+                sb.append("________________");
+                sb.append(a.getId());
+                sb.append("________________");
+            }
+            sb.append("|");
+        }
+        int espL = getEspacioLibre();
+        if (espL==1){
+        sb.append("         |");
+        } else if (espL==2) {
+            sb.append("         |         |");
+        } else if (espL==3) {
+            sb.append("         |         |         |");
+        } else if (espL==4) {
+            sb.append("                                        |");
+        }
+        return sb.toString();
     }
 }

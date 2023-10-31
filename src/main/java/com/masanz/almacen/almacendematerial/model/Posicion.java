@@ -105,7 +105,7 @@ public class Posicion {
      * @param fila se convierte en un char desde un integer
      * @return Devuelve el valor de fila en char
      */
-    private char filaToChar(int fila){
+    public static char filaToChar(int fila){
         return letras.charAt(fila-1);
     }
 

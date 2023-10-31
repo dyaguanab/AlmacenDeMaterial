@@ -53,7 +53,7 @@ public class GestorAlmacen {
         return null;
     }
 
-    public void loadCsv(String strig){
+    public void loadCsv(String s){
 
     }
 

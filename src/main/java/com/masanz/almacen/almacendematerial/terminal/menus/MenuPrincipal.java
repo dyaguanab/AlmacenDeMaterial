@@ -1,6 +1,10 @@
 package com.masanz.almacen.almacendematerial.terminal.menus;
 
 import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
+import com.masanz.almacen.almacendematerial.model.Armario;
+import com.masanz.almacen.almacendematerial.model.Celda;
+import com.masanz.almacen.almacendematerial.model.ETipoArticulo;
+import com.masanz.almacen.almacendematerial.model.Posicion;
 
 import java.util.Scanner;
 
@@ -68,16 +72,42 @@ public class MenuPrincipal {
     }
 
     private void mostrarArmario(){
+        Armario a= gestorAlmacen.getArmario();
         StringBuilder sb= new StringBuilder(" ");
-        sb.append("   | hola         ");
-        sb.append("|            2           ");
-        sb.append("|            3           ");
-        sb.append("|            4           \n");
+        sb.append("  |                    1                   |                    2                   |                    3                   |                    4                   |\n");
+        sb.append("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        for (int i = 0; i < a.getFilas(); i++) {
+            sb.append(" ");
+            sb.append(Posicion.filaToChar(i+1));
+            sb.append(" ");
+            sb.append("|");
+            for (int j = 0; j <a.getColumnas(); j++) {
+                Celda c= a.getCelda(i,j);
+                sb.append(c.toString());
+            }
+            sb.append("\n");
+            sb.append("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        }
         String impresion = sb.toString();
-
         System.out.println(impresion);
     }
 
+    private void meterArticulo(){
+        Scanner scanner= new Scanner(System.in);
+        System.out.print("Id del articulo (7 caracteres), ej. MON0001: ");
+        String id = scanner.nextLine();
+        System.out.print("\n"+ETipoArticulo.values());
+        System.out.print("Tipo de articulo: ");
+        String tipo= scanner.nextLine();
+        System.out.print("\n" + "Espacio que ocupa, ej.1 [1-4]");
+        String espacio= scanner.nextLine();
+        espacio=scanner.nextLine();
+        String fecha= scanner.nextLine();
+        sb.append("Fecha de adquisición (aaaa-mm-dd), ej. 2021-06-05");
+        lectura=scanner.nextLine();
+
+        sb.toString();
+    }
     private void consultarArticulo(){
 
     }
