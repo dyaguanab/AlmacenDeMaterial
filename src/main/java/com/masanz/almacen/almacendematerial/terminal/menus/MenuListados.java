@@ -10,8 +10,21 @@ public class MenuListados {
         this.gestorAlmacen=gestorAlmacen;
     }
 
-    public void run(){
+    public static void run(){
+        StringBuilder sb= new StringBuilder();
+        int dato;
 
+        sb.append("------------------------------------------------------------\n");
+        sb.append("-              L i s t a d o s       ( A M I )             -");
+        sb.append("------------------------------------------------------------\n");
+        sb.append("     1. Articulos por tipo y precio");
+        sb.append("     2. Articulos por tipo y fecha");
+        sb.append("     3. Importar articulos por tipo");
+        sb.append("     0. Terminar");
+        sb.append("------------------------------------------------------------\n");
+        sb.append("Opcion [0-3]: ");
+
+        sb.toString();
     }
 
     public void articulosPorTipoPrecio(){

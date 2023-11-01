@@ -109,12 +109,16 @@ public class Celda {
     }
 
     /**
-     * @return
+     * @return iterator
      */
     public Iterator <Articulo> iterator(){
         return lista.iterator();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString(){
         StringBuilder sb= new StringBuilder("");

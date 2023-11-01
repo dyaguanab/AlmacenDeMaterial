@@ -24,8 +24,7 @@ public class GestorAlmacen {
     }
 
     public int getFilas(){
-        return 0;
-        //TODO
+        return Armario.FILAS;
     }
 
     public boolean meterArticulo(Articulo articulo){

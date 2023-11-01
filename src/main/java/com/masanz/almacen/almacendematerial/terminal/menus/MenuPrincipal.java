@@ -55,7 +55,7 @@ public class MenuPrincipal {
                 } else if (dato == 1) {
                     mostrarArmario();
                 } else if (dato == 2) {
-                    /*Llamar a clase anterior*/
+                    meterArticulo();
                 } else if (dato == 3) {
                     consultarArticulo();
                 } else if (dato == 4) {
@@ -96,31 +96,56 @@ public class MenuPrincipal {
         Scanner scanner= new Scanner(System.in);
         System.out.print("Id del articulo (7 caracteres), ej. MON0001: ");
         String id = scanner.nextLine();
-        System.out.print("\n"+ETipoArticulo.values());
+        System.out.print(ETipoArticulo.values());
         System.out.print("Tipo de articulo: ");
         String tipo= scanner.nextLine();
-        System.out.print("\n" + "Espacio que ocupa, ej.1 [1-4]");
+        System.out.print("Espacio que ocupa, ej.1 [1-4]: ");
         String espacio= scanner.nextLine();
-        espacio=scanner.nextLine();
+        System.out.print("Fecha de adquisición (aaaa-mm-dd), ej. 2021-06-05: ");
         String fecha= scanner.nextLine();
-        sb.append("Fecha de adquisición (aaaa-mm-dd), ej. 2021-06-05");
-        lectura=scanner.nextLine();
+        System.out.print("Precio de adquisicion, ej. 120.0: ");
+        String precio=scanner.nextLine();
 
-        sb.toString();
+        System.out.println("\nArticulo "+ id+ " metido en el armario");
+        //todo
     }
     private void consultarArticulo(){
+        Scanner scanner= new Scanner(System.in);
 
+        System.out.print("Id del articulo (7 caracteres), ej. IMP0001: ");
+        String id= scanner.nextLine();
+
+        System.out.println("\n      Id: ");
+        System.out.println("    Tipo: ");
+        System.out.println(" Espacio: ");
+        System.out.println("   Fecha: ");
+        System.out.println("  Precio: ");
+        System.out.println("Posicion: ");
+
+        //todo
     }
 
     private void consultarCelda(){
+        Scanner scanner= new Scanner(System.in);
 
+        System.out.println("Celda del armario (2 caracteres), ej. A1: ");
+        String celda=scanner.nextLine();
+
+
+        //todo
     }
 
-    private void menuListados(){}
+    private void menuListados(){
+        MenuListados.run();
+    }
 
-    private void grabarEstado(){}
+    private void grabarEstado(){
+        /*Hacer primero csv*/
+    }
 
-    private void cargarDatos(){}
+    private void cargarDatos(){
+        /*Hacer primero csv*/
+    }
 
     public static void main(String[] args) {
         GestorAlmacen gA = new GestorAlmacen();

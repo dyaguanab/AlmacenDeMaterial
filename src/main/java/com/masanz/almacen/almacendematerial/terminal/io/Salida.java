@@ -1,8 +1,10 @@
 package com.masanz.almacen.almacendematerial.terminal.io;
 
+import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
 import com.masanz.almacen.almacendematerial.model.Armario;
 import com.masanz.almacen.almacendematerial.model.Articulo;
 import com.masanz.almacen.almacendematerial.model.ETipoArticulo;
+import com.masanz.almacen.almacendematerial.terminal.menus.MenuPrincipal;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,9 @@ import java.util.Map;
 public class Salida {
 
     public static void menuPrincipal(){
-
+        GestorAlmacen gA= new GestorAlmacen();
+        MenuPrincipal mp= new MenuPrincipal(gA);
+        mp.run();
     }
 
     public static void menuListados(){
@@ -34,10 +38,14 @@ public class Salida {
         return null;
     }
 
-    public static void mostrarArticulosTipo(Map<ETipoArticulo, List<Articulo>> articulo){}
+    public static void mostrarArticulosTipo(Map<ETipoArticulo, List<Articulo>> articulo){
+
+    }
 
 
-    public static void mostrarImporteTipos(Map<ETipoArticulo, Double> precio){}
+    public static void mostrarImporteTipos(Map<ETipoArticulo, Double> precio){
+
+    }
 
     public static void main(String[] args) {
 
