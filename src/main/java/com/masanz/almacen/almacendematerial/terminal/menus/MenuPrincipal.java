@@ -1,6 +1,7 @@
 package com.masanz.almacen.almacendematerial.terminal.menus;
 
 import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
+import com.masanz.almacen.almacendematerial.io.CsvSaver;
 import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
 import com.masanz.almacen.almacendematerial.model.*;
 
@@ -92,32 +93,84 @@ public class MenuPrincipal {
         System.out.println(impresion);
     }
 
-    private void meterArticulo() throws ExcepcionAmi {
+    private void meterArticulo() {
         Scanner scanner= new Scanner(System.in);
-        System.out.print("Id del articulo (7 caracteres), ej. MON0001: ");
-        String id = scanner.nextLine();
-        System.out.print(ETipoArticulo.values());/*COrregirlo*/
-        System.out.print("Tipo de articulo: ");
-        String tipo= scanner.nextLine();
-        System.out.print("Espacio que ocupa, ej.1 [1-4]: ");
-        String espacio= scanner.nextLine();/*EJEMPLO*/
-        System.out.print("Fecha de adquisición (aaaa-mm-dd), ej. 2021-06-05: ");
-        String fechaAdquisicion= scanner.nextLine();
-        System.out.print("Precio de adquisicion, ej. 120.0: ");
-        String precio=scanner.nextLine();
+        String id="";
+        ETipoArticulo tipo=null;
+        int espacio=-1;
+        LocalDate fechaAdquisicion=null;
+        double precio=0;
+
+        do{
+            System.out.print("Id del articulo (7 caracteres), ej. MON0001: ");
+            id = scanner.nextLine();
+            if (id.length()!=7){
+                System.out.println("Id del articulo tiene que ser de 7 caracteres, intentelo de nuevo");
+            }
+        }while (id.length()!=7);
+
+        do {
+            System.out.println("MONITOR IMPRESORA CPU FAX SCANNER");/*COrregirlo*/
+            System.out.print("Tipo de articulo: ");
+            try {
+                tipo= ETipoArticulo.valueOf(scanner.nextLine());
+            } catch(Exception e){
+                System.out.println("Tipo de articulo incorrecto, intentelo de nuevo");
+            }
+        }while (tipo != null);
+
+        do {
+            System.out.print("Espacio que ocupa, ej.1 [1-4]: ");
+            try{
+                espacio= scanner.nextInt();
+                if (espacio<0 || espacio>4) {
+                    System.out.println("Espacio introducido no válido, intentelo de nuevo");
+                }
+            }catch (Exception e){
+                System.out.println("Espacio introducido no válido, intentelo de nuevo");
+            }
+
+        }while (espacio<0 || espacio>4);
+
+        do {
+            System.out.print("Fecha de adquisición (aaaa-mm-dd), ej. 2021-06-05: ");
+            try {
+                fechaAdquisicion = LocalDate.parse(scanner.nextLine());//revisar
+            } catch (Exception e) {
+                System.out.println("La fecha introducida no es valida, introuzcala en el formato indicado");
+            }
+
+        } while (fechaAdquisicion != null);
+
+        do {
+            System.out.print("Precio de adquisicion, ej. 120.0: ");
+            try {
+                precio=scanner.nextDouble();
+                if (precio<0){
+                    System.out.println("El precio introducido es negativo, inténtelo de nuevo");
+                }
+            }catch (Exception e){
+                System.out.println("El precio introducido no es válido, inténtelo de nuevo");
+            }
+        }while (precio <0);
+
+        Articulo art = new Articulo(id, tipo, espacio, fechaAdquisicion, precio);
+        gestorAlmacen.meterArticulo(art);
 
         System.out.println("\nArticulo "+ id+ " metido en el armario");
-        //todo
-
-        Articulo art = new Articulo(id, ETipoArticulo.valueOf(tipo), Integer.parseInt(espacio), LocalDate.parse(fechaAdquisicion), Double.parseDouble(precio));
-        gestorAlmacen.meterArticulo(art);
-        /*Hacer comprobaciones con do while*/
     }
+
     private void consultarArticulo(){
         Scanner scanner= new Scanner(System.in);
+        String id="";
 
-        System.out.print("Id del articulo (7 caracteres), ej. IMP0001: ");
-        String id= scanner.nextLine();
+        do{
+            System.out.print("Id del articulo (7 caracteres), ej. MON0001: ");
+            id = scanner.nextLine();
+            if (id.length()!=7){
+                System.out.println("Id del articulo tiene que ser de 7 caracteres, intentelo de nuevo");
+            }
+        }while (id.length()!=7);
 
         Articulo a= gestorAlmacen.getArticulo(id);
         if (a==null){
@@ -130,8 +183,6 @@ public class MenuPrincipal {
             System.out.println("  Precio: " + a.getPrecio());
             System.out.println("Posicion: " + gestorAlmacen.getPosicionArticulo(a));
         }
-        /*comprobar error caracteres*/
-        //todo
     }
 
     private void consultarCelda(){
@@ -147,6 +198,7 @@ public class MenuPrincipal {
         for (int i = 0; i < la.size(); i++) {
 
         }
+
 
         /*sb.append("| ") lo haremos afuera porque es el mismo para todos*/
 
@@ -232,16 +284,19 @@ public class MenuPrincipal {
         }
     }        //todo
 
-
     private void menuListados(){
-        /*mirar si lo que tengo que llamar a la clase u otra cosa*/
+        MenuListados mL = new MenuListados(gestorAlmacen);
+        mL.run();
     }
 
     private void grabarEstado(){
         /*Hacer primero csv*/
+        String s= CsvSaver.grabar();
+        //todo
     }
 
     private void cargarDatos(){
+        Scanner scanner = new Scanner(System.in);
         /*Hacer primero csv*/
     }
 

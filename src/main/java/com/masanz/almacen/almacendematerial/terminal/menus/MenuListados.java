@@ -1,7 +1,12 @@
 package com.masanz.almacen.almacendematerial.terminal.menus;
 
 import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
+import com.masanz.almacen.almacendematerial.model.Articulo;
+import com.masanz.almacen.almacendematerial.model.EOrden;
+import com.masanz.almacen.almacendematerial.model.ETipoArticulo;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenuListados {
@@ -51,11 +56,40 @@ public class MenuListados {
     }
 
     public void articulosPorTipoPrecio(){
+        Scanner scanner = new Scanner(System.in);
 
-    }
+        String orden="";
+        System.out.println("Por defecto orden Ascendente A u orden Descendente D: ");
+        orden=scanner.nextLine();
+        Map<ETipoArticulo, List<Articulo>> ml;
+
+        if (orden=="D" || orden=="d"){
+            ml= gestorAlmacen.articulosPorTipoPrecio(EOrden.DESCENDENTE);
+        }else {
+            ml= gestorAlmacen.articulosPorTipoPrecio(EOrden.ASCENDENTE);
+        }
+        for (ETipoArticulo tipo: ml.keySet()){
+            List<Articulo> list= ml.get(tipo);
+            System.out.println(tipo.toString());
+            for (int i = 0; i < list.size(); i++) {
+                Articulo a = list.get(i);
+                StringBuilder sb= new StringBuilder(tipo.toString());//empezar a diseñar
+                sb.append("\n");
+                sb.append("                 ");
+                sb.append(a.getId());
+                sb.append("     ");
+                sb.append(a.getFechaAdquisicion());
+                sb.append("         ");
+                sb.append(a.getPrecio());
+            }
+        }
+    }//mirar si asi sirve para t0do
 
     public void articulosPorTipoFecha(){
+        Scanner scanner = new Scanner(System.in);
+        String orden="";
 
+        System.out.println("Por defecto orden Ascendente A u orden Descendente D: ");
     }
 
     public void importePorTipos(){
