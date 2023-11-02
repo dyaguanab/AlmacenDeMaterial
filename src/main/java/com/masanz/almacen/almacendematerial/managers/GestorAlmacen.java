@@ -1,5 +1,7 @@
 package com.masanz.almacen.almacendematerial.managers;
 
+import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
+import com.masanz.almacen.almacendematerial.io.CsvLoader;
 import com.masanz.almacen.almacendematerial.model.*;
 
 import java.util.List;
@@ -27,37 +29,42 @@ public class GestorAlmacen {
         return Armario.FILAS;
     }
 
-    public boolean meterArticulo(Articulo articulo){
-        return false;
+    public boolean meterArticulo(Articulo a) throws ExcepcionAmi {
+        Posicion p= armario.buscarPosicionConEspacio(a.getEspacio());
+        if (p!= null){
+            armario.meter(p,a);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public Posicion getPosicionArticulo(Articulo articulo){
-        return null;
+    public Posicion getPosicionArticulo(Articulo a){
+        return armario.getPosicionArticulo(a);
     }
 
     public List<Articulo> getArticulos(int filas, int columnas){
-        /*DUDA*/
-        return null;
+        return armario.getArticulos(filas,columnas);
     }
 
     public int getOcupacionCelda(Posicion p){
-        return 0;
+        return armario.getOCupacionCelda(p);
     }
 
-    public boolean existeIdArticulo(String string) {
-        return false;
+    public boolean existeIdArticulo(String s) {
+        return armario.existeIdArticulo(s);
     }
 
     public String saveCsv(){
         return null;
     }
 
-    public void loadCsv(String s){
-
+    public void loadCsv(String s) throws ExcepcionAmi{
+        CsvLoader.cargar(s, this);
     }
 
-    public Articulo getArticulo(String string){
-        return null;
+    public Articulo getArticulo(String s){
+        return armario.getArticulo(s);
     }
 
     public Map<ETipoArticulo, List<Articulo>> articulosPorTipoPrecio(EOrden orden){

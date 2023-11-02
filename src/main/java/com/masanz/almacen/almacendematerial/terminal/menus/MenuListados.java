@@ -2,6 +2,8 @@ package com.masanz.almacen.almacendematerial.terminal.menus;
 
 import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
 
+import java.util.Scanner;
+
 public class MenuListados {
 
     private GestorAlmacen gestorAlmacen;
@@ -10,8 +12,9 @@ public class MenuListados {
         this.gestorAlmacen=gestorAlmacen;
     }
 
-    public static void run(){
+    public  void run(){
         StringBuilder sb= new StringBuilder();
+        Scanner scanner = new Scanner(System.in);
         int dato;
 
         sb.append("------------------------------------------------------------\n");
@@ -24,7 +27,27 @@ public class MenuListados {
         sb.append("------------------------------------------------------------\n");
         sb.append("Opcion [0-3]: ");
 
-        sb.toString();
+        do {
+            do {
+                dato = scanner.nextInt();
+                String impresion = sb.toString();
+                System.out.println(impresion);
+
+                if (dato < 0 || dato > 3) {
+                    System.out.println("Error. Opción no valida, intentelo otra vez.");
+                }
+            } while (dato < 0 || dato > 3);
+
+            if (dato == 0){
+                /*terminar*/
+            } else if (dato == 1) {
+                articulosPorTipoPrecio();
+            } else if (dato == 2) {
+                articulosPorTipoFecha();
+            } else if (dato == 3) {
+                importePorTipos();
+            }
+        }while (dato!=0);
     }
 
     public void articulosPorTipoPrecio(){

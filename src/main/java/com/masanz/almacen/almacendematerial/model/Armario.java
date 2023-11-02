@@ -37,11 +37,9 @@ public class Armario {
         return c.getEspacioLibre();
     }
 
-    public void meter(Posicion p,Articulo a) throws ExcepcionAmi {
+    public void meter(Posicion p,Articulo a) throws ExcepcionAmi{
         Celda c= celdas[p.getFilaNumber()-1][p.getColumna()-1];
         c.meter(a);
-        /*Habrá que crear excepciones como celda*/
-        //todo
     }
 
     public int getOCupacionCelda(Posicion p){

@@ -32,9 +32,11 @@ public class Posicion {
         this.columna=b;
     }
 
-//    public Posicion(String letras){
-//
-//    }
+    public Posicion(String p){
+        this.fila = p.charAt(0);
+        this.columna =Integer.parseInt(""+ p.charAt(1));
+    }
+
     /**
     * @return Devolvemos el valor de fila
     * */
