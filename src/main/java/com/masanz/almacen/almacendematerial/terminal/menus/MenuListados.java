@@ -57,7 +57,6 @@ public class MenuListados {
 
     public void articulosPorTipoPrecio(){
         Scanner scanner = new Scanner(System.in);
-
         String orden="";
         System.out.println("Por defecto orden Ascendente A u orden Descendente D: ");
         orden=scanner.nextLine();
@@ -88,8 +87,30 @@ public class MenuListados {
     public void articulosPorTipoFecha(){
         Scanner scanner = new Scanner(System.in);
         String orden="";
-
         System.out.println("Por defecto orden Ascendente A u orden Descendente D: ");
+        orden=scanner.nextLine();
+        Map<ETipoArticulo, List<Articulo>> ml;
+
+        if (orden=="D" || orden=="d"){
+            ml= gestorAlmacen.articulosPorTipoFecha(EOrden.DESCENDENTE);
+        }else {
+            ml= gestorAlmacen.articulosPorTipoFecha(EOrden.ASCENDENTE);
+        }
+        for (ETipoArticulo tipo: ml.keySet()){
+            List<Articulo> list= ml.get(tipo);
+            System.out.println(tipo.toString());
+            for (int i = 0; i < list.size(); i++) {
+                Articulo a = list.get(i);
+                StringBuilder sb= new StringBuilder(tipo.toString());//empezar a diseñar
+                sb.append("\n");
+                sb.append("                 ");
+                sb.append(a.getId());
+                sb.append("     ");
+                sb.append(a.getFechaAdquisicion());
+                sb.append("         ");
+                sb.append(a.getPrecio());
+            }
+        }
     }
 
     public void importePorTipos(){

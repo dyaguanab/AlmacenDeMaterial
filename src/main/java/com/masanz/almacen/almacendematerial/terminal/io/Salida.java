@@ -4,6 +4,7 @@ import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
 import com.masanz.almacen.almacendematerial.model.Armario;
 import com.masanz.almacen.almacendematerial.model.Articulo;
 import com.masanz.almacen.almacendematerial.model.ETipoArticulo;
+import com.masanz.almacen.almacendematerial.terminal.menus.MenuListados;
 import com.masanz.almacen.almacendematerial.terminal.menus.MenuPrincipal;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class Salida {
     }
 
     public static void menuListados(){
-
+        GestorAlmacen gA= new GestorAlmacen();
+        MenuListados mL = new MenuListados(gA);
+        mL.run();
     }
 
     public static void mostrarOpciones(String[] s){}

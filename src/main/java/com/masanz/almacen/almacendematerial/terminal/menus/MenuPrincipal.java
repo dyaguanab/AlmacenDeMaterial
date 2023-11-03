@@ -1,6 +1,7 @@
 package com.masanz.almacen.almacendematerial.terminal.menus;
 
 import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
+import com.masanz.almacen.almacendematerial.io.CsvLoader;
 import com.masanz.almacen.almacendematerial.io.CsvSaver;
 import com.masanz.almacen.almacendematerial.managers.GestorAlmacen;
 import com.masanz.almacen.almacendematerial.model.*;
@@ -93,7 +94,7 @@ public class MenuPrincipal {
         System.out.println(impresion);
     }
 
-    private void meterArticulo() {
+    private void meterArticulo(){
         Scanner scanner= new Scanner(System.in);
         String id="";
         ETipoArticulo tipo=null;
@@ -155,7 +156,11 @@ public class MenuPrincipal {
         }while (precio <0);
 
         Articulo art = new Articulo(id, tipo, espacio, fechaAdquisicion, precio);
-        gestorAlmacen.meterArticulo(art);
+        try {
+            gestorAlmacen.meterArticulo(art);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }//excepción acabada aquí. REVISARs
 
         System.out.println("\nArticulo "+ id+ " metido en el armario");
     }
@@ -202,86 +207,85 @@ public class MenuPrincipal {
 
         /*sb.append("| ") lo haremos afuera porque es el mismo para todos*/
 
-        for (int i = 0; i < ; i++) {
-            Articulo a;
-
-
-            int espacio= a.getEspacio();
-            if (espacio == 1){
-                sb.append(a.getId());//7
-                sb.append("    |\n");//5
-
-                sb.append(a.getTipo());//7
-                sb.append("    |\n");//5
-
-                sb.append(a.getFechaAdquisicion());
-                sb.append(" |\n");
-
-                sb.append(a.getPrecio());
-                sb.append("      |");
-            } else if (espacio == 2) {
-                sb.append("       ");
-                sb.append(a.getId());
-                sb.append("          |\n");
-
-                sb.append("       ");
-                sb.append(a.getTipo());
-                sb.append("              |\n");
-
-                sb.append("       ");
-                sb.append(a.getFechaAdquisicion());
-                sb.append("       |\n");
-
-                sb.append("       ");
-                sb.append(a.getPrecio());
-                sb.append("          |");
-            } else if (espacio == 3) {
-                sb.append("              ");
-                sb.append(a.getId());
-                sb.append("                 |\n");
-
-                sb.append("              ");
-                sb.append(a.getTipo());
-                sb.append("                 |\n");
-
-                sb.append("              ");
-                sb.append(a.getFechaAdquisicion());
-                sb.append("                 |\n");
-
-                sb.append("              ");
-                sb.append(a.getPrecio());
-                sb.append("                 |");
-            } else if (espacio == 4) {
-                sb.append("                     ");
-                sb.append(a.getId());
-                sb.append("                        \n");
-
-                sb.append("                     ");
-                sb.append(a.getTipo());
-                sb.append("                        \n");
-
-                sb.append("                     ");
-                sb.append(a.getFechaAdquisicion());
-                sb.append("                        \n");
-
-                sb.append("                     ");
-                sb.append(a.getPrecio());
-                sb.append("                        \n");
-            }
-        }
-        System.out.println("-----------------------------------------------------");
-
-        Celda c;
-        int espL = c.getEspacioLibre();
-        if (espL==1){
-            sb.append("");
-        } else if (espL==2) {
-            sb.append("");
-        } else if (espL==3){
-            sb.append("");
-        } else if (espL==4) {
-            sb.append("");
-        }
+//            Articulo a;
+//
+//
+//            int espacio= a.getEspacio();
+//            if (espacio == 1){
+//                sb.append(a.getId());//7
+//                sb.append("    |\n");//5
+//
+//                sb.append(a.getTipo());//7
+//                sb.append("    |\n");//5
+//
+//                sb.append(a.getFechaAdquisicion());
+//                sb.append(" |\n");
+//
+//                sb.append(a.getPrecio());
+//                sb.append("      |");
+//            } else if (espacio == 2) {
+//                sb.append("       ");
+//                sb.append(a.getId());
+//                sb.append("          |\n");
+//
+//                sb.append("       ");
+//                sb.append(a.getTipo());
+//                sb.append("              |\n");
+//
+//                sb.append("       ");
+//                sb.append(a.getFechaAdquisicion());
+//                sb.append("       |\n");
+//
+//                sb.append("       ");
+//                sb.append(a.getPrecio());
+//                sb.append("          |");
+//            } else if (espacio == 3) {
+//                sb.append("              ");
+//                sb.append(a.getId());
+//                sb.append("                 |\n");
+//
+//                sb.append("              ");
+//                sb.append(a.getTipo());
+//                sb.append("                 |\n");
+//
+//                sb.append("              ");
+//                sb.append(a.getFechaAdquisicion());
+//                sb.append("                 |\n");
+//
+//                sb.append("              ");
+//                sb.append(a.getPrecio());
+//                sb.append("                 |");
+//            } else if (espacio == 4) {
+//                sb.append("                     ");
+//                sb.append(a.getId());
+//                sb.append("                        \n");
+//
+//                sb.append("                     ");
+//                sb.append(a.getTipo());
+//                sb.append("                        \n");
+//
+//                sb.append("                     ");
+//                sb.append(a.getFechaAdquisicion());
+//                sb.append("                        \n");
+//
+//                sb.append("                     ");
+//                sb.append(a.getPrecio());
+//                sb.append("                        \n");
+//            }
+//
+//        System.out.println("-----------------------------------------------------");
+//
+//        Celda c=;
+//        int espL = c.getEspacioLibre();
+//        if (espL==1){
+//            sb.append("");
+//        } else if (espL==2) {
+//            sb.append("");
+//        } else if (espL==3){
+//            sb.append("");
+//        } else if (espL==4) {
+//            sb.append("");
+//        }
     }        //todo
 
     private void menuListados(){
@@ -290,14 +294,25 @@ public class MenuPrincipal {
     }
 
     private void grabarEstado(){
-        /*Hacer primero csv*/
-        String s= CsvSaver.grabar();
-        //todo
+        try {
+            String archivo = CsvSaver.grabar(gestorAlmacen);
+            System.out.println("Estado del armario grabado correctamente");
+            System.out.println(archivo);
+        } catch (Exception e) {
+            System.out.println("Estado del armario no grabado");
+        }
     }
 
     private void cargarDatos(){
         Scanner scanner = new Scanner(System.in);
-        /*Hacer primero csv*/
+        try{
+            System.out.println("Introduce el nombre del fichero ej. backup/ami_2023-06-05_193120.csv :");
+            String s= scanner.nextLine();
+            CsvLoader.cargar(s,gestorAlmacen);
+
+        } catch (Exception e){
+            System.out.println("Archivo seleccionado no grabado");
+        }
     }
 
     public static void main(String[] args) {

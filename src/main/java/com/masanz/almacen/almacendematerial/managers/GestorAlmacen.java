@@ -34,7 +34,7 @@ public class GestorAlmacen {
         return Armario.FILAS;
     }
 
-    public boolean meterArticulo(Articulo a) throws ExcepcionAmi {
+    public boolean meterArticulo(Articulo a) throws Exception{
         Posicion p= armario.buscarPosicionConEspacio(a.getEspacio());
         if (p!= null){
             armario.meter(p,a);
@@ -95,7 +95,6 @@ public class GestorAlmacen {
             }
         }
         pw.close();
-
         return archivo;
     }
 

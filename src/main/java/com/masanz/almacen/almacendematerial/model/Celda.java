@@ -2,6 +2,7 @@ package com.masanz.almacen.almacendematerial.model;
 
 import com.masanz.almacen.almacendematerial.exceptions.ExcepcionAmi;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -116,8 +117,10 @@ public class Celda {
     }
 
     /**
-     *
-     * @return
+     * Se hace un Stringbuilder para añadir elementos en cadena, se recorre la lista contiene Articulos
+     * y a partir de ahí se obtiene los espacios que hay, depende del espacio se asigna unos '_' a los lados
+     * de la id obtenida. Se calcula los espacios libres que hay y se le asigna unos espacios en blanco.
+     * @return la cadena de caracteres
      */
     @Override
     public String toString(){
@@ -157,4 +160,27 @@ public class Celda {
         }
         return sb.toString();
     }
+
+//    public static void main(String[] args) {
+//        Celda c = new Celda(4);
+//
+//        LocalDate fecha = LocalDate.parse("2023-06-11");
+//
+//        Articulo a = new Articulo("MON1001",ETipoArticulo.MONITOR,3, fecha,1500.0);
+//        Articulo a1 = new Articulo("MON1002",ETipoArticulo.MONITOR,3, fecha,1500.0);
+//
+//        try {
+//            c.meter(a);
+//            c.meter(a);
+//        }catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//
+//        try {
+//            c.meter(a);
+//            c.meter(a1);
+//        }catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
