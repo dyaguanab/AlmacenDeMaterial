@@ -13,10 +13,19 @@ public class MenuListados {
 
     private GestorAlmacen gestorAlmacen;
 
+    /**
+     * @param gestorAlmacen se inicializa
+     */
     public MenuListados(GestorAlmacen gestorAlmacen){
         this.gestorAlmacen=gestorAlmacen;
     }
 
+    /**
+     * Se crea un Scanner y un StringBuilder sb, en el sb se dibuja el menú, después se hace 2 do while anidados, en el que
+     * el del interior se guarda en dato el número introducido por el scanner, se hace una condición para que el dato sea una
+     * de las opciones que se piden. Cuando una opción valida es elegida llama al método que le corresponde. El while exterior
+     * es para mantener en bucle el menú
+     */
     public  void run(){
         StringBuilder sb= new StringBuilder();
         Scanner scanner = new Scanner(System.in);
@@ -55,6 +64,9 @@ public class MenuListados {
         }while (dato!=0);
     }
 
+    /**
+     *
+     */
     public void articulosPorTipoPrecio(){
         Scanner scanner = new Scanner(System.in);
         String orden="";
@@ -84,6 +96,9 @@ public class MenuListados {
         }
     }//mirar si asi sirve para t0do
 
+    /**
+     *
+     */
     public void articulosPorTipoFecha(){
         Scanner scanner = new Scanner(System.in);
         String orden="";

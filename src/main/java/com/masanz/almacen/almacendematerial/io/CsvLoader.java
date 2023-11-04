@@ -11,6 +11,11 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Se  pasa por parámetros de tipo string el archivo que desea el usuario y el gestor almacen.
+ * Se crea un scanner al que se le añadirán en un while los archivos guardados en este en un articulo
+ * y también la posición. Se meten en el armario la posición y articulo.
+ */
 public class CsvLoader {
     public static void cargar(String s, GestorAlmacen gE) throws ExcepcionAmi {
         try{

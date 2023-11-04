@@ -12,12 +12,18 @@ import java.util.Map;
 
 public class Salida {
 
+    /**
+     * Se inicia el menu principal
+     */
     public static void menuPrincipal(){
         GestorAlmacen gA= new GestorAlmacen();
         MenuPrincipal mp= new MenuPrincipal(gA);
         mp.run();
     }
 
+    /**
+     * Se inicia el menu listados
+     */
     public static void menuListados(){
         GestorAlmacen gA= new GestorAlmacen();
         MenuListados mL = new MenuListados(gA);
