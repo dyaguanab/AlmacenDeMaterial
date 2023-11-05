@@ -14,6 +14,9 @@ public class MenuPrincipal {
 
     private GestorAlmacen gestorAlmacen;
 
+    /**
+     * @param gestorAlmacen se inicializa
+     */
     public MenuPrincipal(GestorAlmacen gestorAlmacen){
         this.gestorAlmacen = gestorAlmacen;
     }
@@ -22,6 +25,12 @@ public class MenuPrincipal {
         /*HACER PRIMERO CSVLOADER*/
     }
 
+    /**
+     * Se crea un Scanner y un StringBuilder sb, en el sb se dibuja el menú, después se hace 2 do while anidados, en el que
+     * el del interior se guarda en dato el número introducido por el scanner, se hace una condición para que el dato sea una
+     * de las opciones que se piden. Cuando una opción valida es elegida llama al método que le corresponde. El while exterior
+     * es para mantener en bucle el menú
+     */
     public void run(){
         Scanner scanner = new Scanner(System.in);
         int dato;
@@ -73,6 +82,10 @@ public class MenuPrincipal {
 
     }
 
+    /**
+     * Se muestra el armario haciendo un Stringbuilder en el que se irá añadiendo la información
+     * del contenido de este, los espacios vacios y los '|' mediante 2 for
+     */
     private void mostrarArmario(){
         Armario a= gestorAlmacen.getArmario();
         StringBuilder sb= new StringBuilder(" ");
@@ -94,6 +107,12 @@ public class MenuPrincipal {
         System.out.println(impresion);
     }
 
+    /**
+     * Se crea un scanner y se inicializan ciertas variables para que después el usuario
+     * introduzca valores en esas variables que serán utilizadas para meter un articulo en el armario
+     * en cada una de las variables se ponen ciertas condiciones con try catch para que tenga sentido
+     * y sean correctos la información introducida por el usuario
+     */
     private void meterArticulo(){
         Scanner scanner= new Scanner(System.in);
         String id="";
@@ -165,6 +184,10 @@ public class MenuPrincipal {
         System.out.println("\nArticulo "+ id+ " metido en el armario");
     }
 
+    /**
+     * El usuario con el scanner introduce la id que quiere buscar, esta tiene que cumplir las condiciones
+     * luego se busca en los articulos, en la que si es encontrada muestra en pantalla las caracteristcas del articulo
+     */
     private void consultarArticulo(){
         Scanner scanner= new Scanner(System.in);
         String id="";
@@ -190,6 +213,9 @@ public class MenuPrincipal {
         }
     }
 
+    /**
+     *
+     */
     private void consultarCelda(){
         Scanner scanner= new Scanner(System.in);
         StringBuilder sb= new StringBuilder("");
@@ -288,11 +314,18 @@ public class MenuPrincipal {
 //        }
     }        //todo
 
+    /**
+     * Se inicializa y se llama al menu listados
+     */
     private void menuListados(){
         MenuListados mL = new MenuListados(gestorAlmacen);
         mL.run();
     }
 
+    /**
+     * Se graba el estado en el que se encuentra el armario, si es correcto muestra un mensaje
+     * que ha sido grabado en el caso negativo también muestra otro mensaje
+     */
     private void grabarEstado(){
         try {
             String archivo = CsvSaver.grabar(gestorAlmacen);
@@ -303,6 +336,10 @@ public class MenuPrincipal {
         }
     }
 
+    /**
+     * Se pide al usuario un fichero para cargarlo, si es correcto carga el fichero
+     * en el caso negativo muestra un mensaje
+     */
     private void cargarDatos(){
         Scanner scanner = new Scanner(System.in);
         try{
@@ -311,7 +348,7 @@ public class MenuPrincipal {
             CsvLoader.cargar(s,gestorAlmacen);
 
         } catch (Exception e){
-            System.out.println("Archivo seleccionado no grabado");
+            System.out.println("Archivo seleccionado no cargado");
         }
     }
 

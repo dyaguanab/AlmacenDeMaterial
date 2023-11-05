@@ -18,22 +18,40 @@ public class GestorAlmacen {
 
     private Armario armario;
 
+    /**
+     * Inicializa el armario
+     */
     public GestorAlmacen(){
         this.armario=new Armario();
     }
 
+    /**
+     * @return devuelve armario
+     */
     public Armario getArmario(){
         return armario;
     }
 
+    /**
+     * @return devuelve los espacios de las celdas
+     */
     public int getEspaciosCeldas(){
         return ESPACIOS_CELDA;
     }
 
+    /**
+     * @return devuelve las filas
+     */
     public int getFilas(){
         return Armario.FILAS;
     }
 
+    /**
+     * @param a variable de tipo Articulo
+     * @return Devuelve true si en el armario ha sido metido el articulo,
+     * en caso negativo devuelve false
+     * @throws Exception lanza una excepción
+     */
     public boolean meterArticulo(Articulo a) throws Exception{
         Posicion p= armario.buscarPosicionConEspacio(a.getEspacio());
         if (p!= null){
@@ -44,18 +62,35 @@ public class GestorAlmacen {
         }
     }
 
+    /**
+     * @param a variable de tipo Articulo
+     * @return la posiion del articulo que ha introducido el usuario
+     */
     public Posicion getPosicionArticulo(Articulo a){
         return armario.getPosicionArticulo(a);
     }
 
+    /**
+     * @param filas parámetro introducido por el usuario
+     * @param columnas parámetro introducido por el usuario
+     * @return los articulos encontrados en las variables introducidas
+     */
     public List<Articulo> getArticulos(int filas, int columnas){
         return armario.getArticulos(filas,columnas);
     }
 
+    /**
+     * @param p variable de tipo Posicion
+     * @return la ocupación de la celda en la posicion introducida
+     */
     public int getOcupacionCelda(Posicion p){
         return armario.getOCupacionCelda(p);
     }
 
+    /**
+     * @param s parámetro de tipo String
+     * @return si existe el articulo introducido por la id
+     */
     public boolean existeIdArticulo(String s) {
         return armario.existeIdArticulo(s);
     }
@@ -98,18 +133,35 @@ public class GestorAlmacen {
         return archivo;
     }
 
+    /**
+     * @param s parámetro de tipo String
+     * @throws ExcepcionAmi lanza una excepción
+     * Carga el csv introducido por el usuario
+     */
     public void loadCsv(String s) throws ExcepcionAmi{
         CsvLoader.cargar(s, this);
     }
 
+    /**
+     * @param s parámetro de tipo String
+     * @return obtiene los articulos
+     */
     public Articulo getArticulo(String s){
         return armario.getArticulo(s);
     }
 
+    /**
+     * @param orden parámetro de tipo EOrden
+     * @return los articulos por el tipo precio ordenados
+     */
     public Map<ETipoArticulo, List<Articulo>> articulosPorTipoPrecio(EOrden orden){
         return armario.articulosPorTipo((o1, o2) ->(int)(o1.getPrecio()-o2.getPrecio()),orden);
     }
 
+    /**
+     * @param orden parámetro de tipo EOrden
+     * @return los articulos por el tipo fecha ordenados
+     */
     public Map<ETipoArticulo, List<Articulo>> articulosPorTipoFecha(EOrden orden){
         return armario.articulosPorTipo((o1, o2) ->o1.getFechaAdquisicion().compareTo(o2.getFechaAdquisicion()),orden);
     }

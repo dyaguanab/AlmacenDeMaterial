@@ -65,7 +65,10 @@ public class MenuListados {
     }
 
     /**
-     *
+     * Se crea un scanner y una variable de tipo String que guardará lo introducido a través del scanner
+     * creamos un map de EtipoArticulo y una lista de tipo articulo, se hace un if establecer el orden
+     * de los articulos de tipo precio
+     * se hace 2 for anidados en el que el interior es para dibujar los articulos  sobre la lista creada
      */
     public void articulosPorTipoPrecio(){
         Scanner scanner = new Scanner(System.in);
@@ -97,7 +100,10 @@ public class MenuListados {
     }//mirar si asi sirve para t0do
 
     /**
-     *
+     * Se crea un scanner y una variable de tipo String que guardará lo introducido a través del scanner
+     * creamos un map de EtipoArticulo y una lista de tipo articulo, se hace un if establecer el orden
+     * de los articulos de tipo fecha
+     * se hace 2 for anidados en el que el interior es para dibujar los articulos  sobre la lista creada
      */
     public void articulosPorTipoFecha(){
         Scanner scanner = new Scanner(System.in);
@@ -116,7 +122,7 @@ public class MenuListados {
             System.out.println(tipo.toString());
             for (int i = 0; i < list.size(); i++) {
                 Articulo a = list.get(i);
-                StringBuilder sb= new StringBuilder(tipo.toString());//empezar a diseñar
+                StringBuilder sb= new StringBuilder(tipo.toString());
                 sb.append("\n");
                 sb.append("                 ");
                 sb.append(a.getId());
@@ -128,6 +134,9 @@ public class MenuListados {
         }
     }
 
+    /**
+     *
+     */
     public void importePorTipos(){
 
     }
