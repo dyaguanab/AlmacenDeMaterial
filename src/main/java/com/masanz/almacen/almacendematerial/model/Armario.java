@@ -65,7 +65,7 @@ public class Armario {
      * Meto el articulo en la celda
      * @throws ExcepcionAmi lanzo la excepción creada
      */
-    public void meter(Posicion p,Articulo a) throws Exception{
+    public void meter(Posicion p,Articulo a) throws ExcepcionAmi{
         Celda c= celdas[p.getFilaNumber()-1][p.getColumna()-1];
         c.meter(a);
     }
@@ -173,30 +173,41 @@ public class Armario {
      */
     public Map<ETipoArticulo, List <Articulo>>
     articulosPorTipo(java.util.Comparator<Articulo> fyp, EOrden orden){
-        ETipoArticulo[] tipoArticulo =ETipoArticulo.values();
-        Map<ETipoArticulo, List <Articulo>> mp = new HashMap<>();
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
-                Celda c= celdas[i][j];
-                Iterator<Articulo> ite= c.iterator();
-                while (ite.hasNext()){
-                    Articulo a= ite.next();
-                    ETipoArticulo tipo= a.getTipo();
-                    if (!mp.containsKey(tipo)){
-                        mp.put(tipo,new LinkedList<>());
-                    }
-                    mp.get(tipo).add(a);
+
+        ETipoArticulo[] tipos = ETipoArticulo.values();
+        Map<ETipoArticulo,List<Articulo>> listado = new HashMap<>();
+        for(ETipoArticulo tipo: ETipoArticulo.values()) {
+            listado.put(tipo, new LinkedList<>());
+        }
+        for (int i = FILAS -1 ; i >=0 ; i--) {
+            for (int j = COLUMNAS -1; j >=0 ; j--) {
+                List<Articulo> lista =celdas[i][j].getLista();
+                for (Articulo a : lista){
+                    ETipoArticulo t = a.getTipo();
+                    List<Articulo> l =  listado.get(t);
+                    l.add(a);
                 }
+
             }
+
         }
 
-        for (int i = 0; i < tipoArticulo.length; i++) {
-            ETipoArticulo tipo = tipoArticulo[i];
-            mp.get(tipo).sort(fyp);
-            if (orden ==EOrden.DESCENDENTE){
-                Collections.reverse(mp.get(tipo));
-            }/**/
+        for (ETipoArticulo et: tipos) {
+
+            List<Articulo> lista =  listado.get(et);
+            lista.sort(fyp);
+            if (orden == EOrden.DESCENDENTE){
+                List<Articulo> lista2 = new LinkedList<>();
+                for (Articulo a: lista) {
+                    lista2.add(0,a);
+                }
+                listado.put(et , lista2);
+            }
+
         }
-        return mp;
+
+        return listado;
     }
+
+
 }

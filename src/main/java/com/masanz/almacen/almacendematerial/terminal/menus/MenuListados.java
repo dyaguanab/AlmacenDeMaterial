@@ -29,23 +29,25 @@ public class MenuListados {
     public  void run(){
         StringBuilder sb= new StringBuilder();
         Scanner scanner = new Scanner(System.in);
+
         int dato;
 
         sb.append("------------------------------------------------------------\n");
-        sb.append("-              L i s t a d o s       ( A M I )             -");
+        sb.append("-              L i s t a d o s       ( A M I )             -\n");
         sb.append("------------------------------------------------------------\n");
-        sb.append("     1. Articulos por tipo y precio");
-        sb.append("     2. Articulos por tipo y fecha");
-        sb.append("     3. Importar articulos por tipo");
-        sb.append("     0. Terminar");
+        sb.append("     1. Articulos por tipo y precio\n");
+        sb.append("     2. Articulos por tipo y fecha\n");
+        sb.append("     3. Importar articulos por tipo\n");
+        sb.append("     0. Terminar\n");
         sb.append("------------------------------------------------------------\n");
         sb.append("Opcion [0-3]: ");
 
         do {
             do {
-                dato = scanner.nextInt();
                 String impresion = sb.toString();
+
                 System.out.println(impresion);
+                dato = scanner.nextInt();
 
                 if (dato < 0 || dato > 3) {
                     System.out.println("Error. Opción no valida, intentelo otra vez.");
@@ -53,7 +55,6 @@ public class MenuListados {
             } while (dato < 0 || dato > 3);
 
             if (dato == 0){
-                /*terminar*/
             } else if (dato == 1) {
                 articulosPorTipoPrecio();
             } else if (dato == 2) {
@@ -71,33 +72,36 @@ public class MenuListados {
      * se hace 2 for anidados en el que el interior es para dibujar los articulos  sobre la lista creada
      */
     public void articulosPorTipoPrecio(){
-        Scanner scanner = new Scanner(System.in);
-        String orden="";
-        System.out.println("Por defecto orden Ascendente A u orden Descendente D: ");
-        orden=scanner.nextLine();
-        Map<ETipoArticulo, List<Articulo>> ml;
+            Scanner scanner = new Scanner(System.in);
+            String orden="";
+            System.out.println("Por defecto orden Ascendente A u orden Descendente D: ");
+            orden=scanner.nextLine();
+            Map<ETipoArticulo, List<Articulo>> ml;
 
-        if (orden=="D" || orden=="d"){
-            ml= gestorAlmacen.articulosPorTipoPrecio(EOrden.DESCENDENTE);
-        }else {
-            ml= gestorAlmacen.articulosPorTipoPrecio(EOrden.ASCENDENTE);
-        }
-        for (ETipoArticulo tipo: ml.keySet()){
-            List<Articulo> list= ml.get(tipo);
-            System.out.println(tipo.toString());
-            for (int i = 0; i < list.size(); i++) {
-                Articulo a = list.get(i);
-                StringBuilder sb= new StringBuilder(tipo.toString());//empezar a diseñar
-                sb.append("\n");
-                sb.append("                 ");
-                sb.append(a.getId());
-                sb.append("     ");
-                sb.append(a.getFechaAdquisicion());
-                sb.append("         ");
-                sb.append(a.getPrecio());
+            if (orden.equals("A") || orden.equals("D")){
+                ml= gestorAlmacen.articulosPorTipoPrecio(orden.equals("A") ? EOrden.ASCENDENTE : EOrden.DESCENDENTE);
+            }else {
+                ml= gestorAlmacen.articulosPorTipoPrecio(EOrden.ASCENDENTE);
             }
-        }
-    }//mirar si asi sirve para t0do
+            for (ETipoArticulo tipo: ml.keySet()){
+                List<Articulo> list= ml.get(tipo);
+                System.out.println(tipo.toString());
+                for (int i = 0; i < list.size(); i++) {
+                    Articulo a = list.get(i);
+                    StringBuilder sb= new StringBuilder();//empezar a diseñar
+                    sb.append("                 ");
+                    sb.append(a.getId());
+                    sb.append("     ");
+                    sb.append(a.getFechaAdquisicion());
+                    sb.append("         ");
+                    sb.append(a.getPrecio());
+
+                    String impresion= sb.toString();
+                    System.out.println(impresion);
+                }
+            }
+    }
+
 
     /**
      * Se crea un scanner y una variable de tipo String que guardará lo introducido a través del scanner
@@ -112,7 +116,7 @@ public class MenuListados {
         orden=scanner.nextLine();
         Map<ETipoArticulo, List<Articulo>> ml;
 
-        if (orden=="D" || orden=="d"){
+        if (orden=="A" || orden=="D"){
             ml= gestorAlmacen.articulosPorTipoFecha(EOrden.DESCENDENTE);
         }else {
             ml= gestorAlmacen.articulosPorTipoFecha(EOrden.ASCENDENTE);
@@ -122,26 +126,101 @@ public class MenuListados {
             System.out.println(tipo.toString());
             for (int i = 0; i < list.size(); i++) {
                 Articulo a = list.get(i);
-                StringBuilder sb= new StringBuilder(tipo.toString());
-                sb.append("\n");
+                StringBuilder sb= new StringBuilder();
                 sb.append("                 ");
                 sb.append(a.getId());
                 sb.append("     ");
                 sb.append(a.getFechaAdquisicion());
                 sb.append("         ");
                 sb.append(a.getPrecio());
+
+                String impresion= sb.toString();
+                System.out.println(impresion);
             }
         }
     }
 
     /**
-     *
+     * Se hace StringBuilder para dibujar el esquema. Se hace una lista en la que por cada tipo
+     * se busca su precio y se va sumando en una variable en la que al final en otra variable se
+     * suma el total de todos los precio tipos
      */
     public void importePorTipos(){
+        StringBuilder sb= new StringBuilder("");
 
+
+        Map<ETipoArticulo, List<Articulo>> tipo=gestorAlmacen.articulosPorTipoFecha(EOrden.ASCENDENTE);
+        double sumaPrecioTipos= 0.0;
+        double totalPrecioTipos= 0.0;
+
+        List<Articulo> lista= tipo.get(ETipoArticulo.MONITOR);
+        for (int i = 0; i < lista.size(); i++) {
+            sumaPrecioTipos += lista.get(i).getPrecio();
+        }
+        totalPrecioTipos+=sumaPrecioTipos;
+        sb.append(ETipoArticulo.MONITOR.toString());
+        sb.append("             ");
+        sb.append(sumaPrecioTipos);
+        sb.append("\n");
+
+        sumaPrecioTipos =0.0;
+        lista= tipo.get(ETipoArticulo.FAX);
+        for (int i = 0; i < lista.size(); i++) {
+            sumaPrecioTipos += lista.get(i).getPrecio();
+        }
+        totalPrecioTipos+=sumaPrecioTipos;
+        sb.append(ETipoArticulo.FAX.toString());
+        sb.append("                 ");
+        sb.append(sumaPrecioTipos);
+        sb.append("\n");
+
+        sumaPrecioTipos =0.0;
+        lista= tipo.get(ETipoArticulo.IMPRESORA);
+        for (int i = 0; i < lista.size(); i++) {
+            sumaPrecioTipos += lista.get(i).getPrecio();
+        }
+        totalPrecioTipos+=sumaPrecioTipos;
+        sb.append(ETipoArticulo.IMPRESORA.toString());
+        sb.append("           ");
+        sb.append(sumaPrecioTipos);
+        sb.append("\n");
+
+        sumaPrecioTipos =0.0;
+        lista= tipo.get(ETipoArticulo.SCANNER);
+        for (int i = 0; i < lista.size(); i++) {
+            sumaPrecioTipos += lista.get(i).getPrecio();
+        }
+        totalPrecioTipos+=sumaPrecioTipos;
+        sb.append(ETipoArticulo.SCANNER.toString());
+        sb.append("             ");
+        sb.append(sumaPrecioTipos);
+        sb.append("\n");
+
+        sumaPrecioTipos =0.0;
+        lista= tipo.get(ETipoArticulo.CPU);
+        for (int i = 0; i < lista.size(); i++) {
+            sumaPrecioTipos += lista.get(i).getPrecio();
+        }
+        totalPrecioTipos+=sumaPrecioTipos;
+        sb.append(ETipoArticulo.CPU.toString());
+        sb.append("                 ");
+        sb.append(sumaPrecioTipos);
+        sb.append("\n");
+
+        sb.append("---------------------------\n");
+        sb.append("Total               ");
+        sb.append(totalPrecioTipos);
+
+        System.out.println(sb.toString());
     }
 
     public static void main(String[] args) {
-
+        System.out.println("MONITOR             370,00");
+        System.out.println("FAX                 650,00");
+        System.out.println("IMPRESORA           800,00");
+        System.out.println("SCANNER             500,00");
+        System.out.println("CPU                7200,00");
+        System.out.println("---------------------------");
+        System.out.println("Total              9520,00");
     }
 }

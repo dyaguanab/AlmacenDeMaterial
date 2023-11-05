@@ -36,8 +36,7 @@ public class Articulo {
      */
     public boolean equals(Object o){
         Articulo a = (Articulo) o;
-        return a.fechaAdquisicion == fechaAdquisicion && a.id == id &&
-                a.tipo==tipo && a.espacio==espacio && a.precio==precio;
+        return a.id == id;
     }
 
 //    public int hashCode(){

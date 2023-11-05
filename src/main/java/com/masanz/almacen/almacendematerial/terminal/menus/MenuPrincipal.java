@@ -21,9 +21,10 @@ public class MenuPrincipal {
         this.gestorAlmacen = gestorAlmacen;
     }
 
-    private void cargaInicialDatos(){
-        /*HACER PRIMERO CSVLOADER*/
-    }
+//    private void cargaInicialDatos(){
+//
+//    }
+
 
     /**
      * Se crea un Scanner y un StringBuilder sb, en el sb se dibuja el menú, después se hace 2 do while anidados, en el que
@@ -137,30 +138,30 @@ public class MenuPrincipal {
             } catch(Exception e){
                 System.out.println("Tipo de articulo incorrecto, intentelo de nuevo");
             }
-        }while (tipo != null);
+        }while (tipo == null);
 
         do {
             System.out.print("Espacio que ocupa, ej.1 [1-4]: ");
             try{
                 espacio= scanner.nextInt();
-                if (espacio<0 || espacio>4) {
+                if (espacio<1 || espacio>4) {
                     System.out.println("Espacio introducido no válido, intentelo de nuevo");
                 }
             }catch (Exception e){
                 System.out.println("Espacio introducido no válido, intentelo de nuevo");
             }
 
-        }while (espacio<0 || espacio>4);
+        }while (espacio<1 || espacio>4);
 
         do {
             System.out.print("Fecha de adquisición (aaaa-mm-dd), ej. 2021-06-05: ");
             try {
-                fechaAdquisicion = LocalDate.parse(scanner.nextLine());//revisar
+                fechaAdquisicion = LocalDate.parse(scanner.next());//revisar
             } catch (Exception e) {
                 System.out.println("La fecha introducida no es valida, introuzcala en el formato indicado");
             }
 
-        } while (fechaAdquisicion != null);
+        } while (fechaAdquisicion == null);
 
         do {
             System.out.print("Precio de adquisicion, ej. 120.0: ");
@@ -177,11 +178,10 @@ public class MenuPrincipal {
         Articulo art = new Articulo(id, tipo, espacio, fechaAdquisicion, precio);
         try {
             gestorAlmacen.meterArticulo(art);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }//excepción acabada aquí. REVISARs
-
-        System.out.println("\nArticulo "+ id+ " metido en el armario");
+            System.out.println("\nArticulo "+ id+ " metido en el armario");
+        } catch (ExcepcionAmi e) {
+            System.out.println("\nArticulo "+ id+ " no se ha podido meter en el armario: " + e.getMessage());
+        }//excepción acabada aquí. REVISAR
     }
 
     /**
@@ -214,105 +214,79 @@ public class MenuPrincipal {
     }
 
     /**
-     *
+     * Muestra la celda introduciendo 2 caracteres de la posicion deseada por el usuario, se muestra con un sb append
      */
-    private void consultarCelda(){
-        Scanner scanner= new Scanner(System.in);
-        StringBuilder sb= new StringBuilder("");
+    private void consultarCelda() {
 
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Celda del armario (2 caracteres), ej. A1: ");
-        String celda=scanner.nextLine();
+        String celda = scanner.next();
 
-        Posicion p =new Posicion(celda);
-        List<Articulo> la=gestorAlmacen.getArticulos(p.getFila(), p.getColumna());
+        Posicion p = new Posicion(celda);
+        List<Articulo> la = gestorAlmacen.getArticulos(p.getFilaNumber(), p.getColumna());
+
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < la.size(); i++) {
+            Articulo a = la.get(i);
 
+            if (a.getEspacio() == 1) {
+                sb.append("| " + a.getId() + "    |\n");
+            } else if (a.getEspacio() == 2) {
+                sb.append("|        " + a.getId() + "        |\n");
+            } else if (a.getEspacio() == 3) {
+                sb.append("|               " + a.getId() + "               |\n");
+            } else if (a.getEspacio() == 4) {
+                sb.append("|                      " + a.getId() + "                      |\n");
+            }
         }
 
+        for (int i = 0; i < la.size(); i++) {
+            Articulo a = la.get(i);
 
-        /*sb.append("| ") lo haremos afuera porque es el mismo para todos*/
+            if (a.getEspacio() == 1) {
+                sb.append(String.format("|         %8s           |\n", a.getTipo().toString()));
+            } else if (a.getEspacio() == 2) {
+                sb.append(String.format("|         %8s                 |\n", a.getTipo().toString()));
+            } else if (a.getEspacio() == 3) {
+                sb.append(String.format("|         %8s         |\n", a.getTipo().toString()));
+            } else if (a.getEspacio() == 4) {
+                sb.append(String.format("|         %8s           |\n", a.getTipo().toString()));
+            }
+        }
 
-//            Articulo a;
-//
-//
-//            int espacio= a.getEspacio();
-//            if (espacio == 1){
-//                sb.append(a.getId());//7
-//                sb.append("    |\n");//5
-//
-//                sb.append(a.getTipo());//7
-//                sb.append("    |\n");//5
-//
-//                sb.append(a.getFechaAdquisicion());
-//                sb.append(" |\n");
-//
-//                sb.append(a.getPrecio());
-//                sb.append("      |");
-//            } else if (espacio == 2) {
-//                sb.append("       ");
-//                sb.append(a.getId());
-//                sb.append("          |\n");
-//
-//                sb.append("       ");
-//                sb.append(a.getTipo());
-//                sb.append("              |\n");
-//
-//                sb.append("       ");
-//                sb.append(a.getFechaAdquisicion());
-//                sb.append("       |\n");
-//
-//                sb.append("       ");
-//                sb.append(a.getPrecio());
-//                sb.append("          |");
-//            } else if (espacio == 3) {
-//                sb.append("              ");
-//                sb.append(a.getId());
-//                sb.append("                 |\n");
-//
-//                sb.append("              ");
-//                sb.append(a.getTipo());
-//                sb.append("                 |\n");
-//
-//                sb.append("              ");
-//                sb.append(a.getFechaAdquisicion());
-//                sb.append("                 |\n");
-//
-//                sb.append("              ");
-//                sb.append(a.getPrecio());
-//                sb.append("                 |");
-//            } else if (espacio == 4) {
-//                sb.append("                     ");
-//                sb.append(a.getId());
-//                sb.append("                        \n");
-//
-//                sb.append("                     ");
-//                sb.append(a.getTipo());
-//                sb.append("                        \n");
-//
-//                sb.append("                     ");
-//                sb.append(a.getFechaAdquisicion());
-//                sb.append("                        \n");
-//
-//                sb.append("                     ");
-//                sb.append(a.getPrecio());
-//                sb.append("                        \n");
-//            }
-//
-//        System.out.println("-----------------------------------------------------");
-//
-//        Celda c=;
-//        int espL = c.getEspacioLibre();
-//        if (espL==1){
-//            sb.append("");
-//        } else if (espL==2) {
-//            sb.append("");
-//        } else if (espL==3){
-//            sb.append("");
-//        } else if (espL==4) {
-//            sb.append("");
-//        }
-    }        //todo
+        for (int i = 0; i < la.size(); i++) {
+            Articulo a = la.get(i);
+
+            if (a.getEspacio() == 1) {
+                sb.append("| " + a.getFechaAdquisicion() + "    |\n");
+            } else if (a.getEspacio() == 2) {
+                sb.append("|        " + a.getFechaAdquisicion() + "        |\n");
+            } else if (a.getEspacio() == 3) {
+                sb.append("|               " + a.getFechaAdquisicion() + "               |\n");
+            } else if (a.getEspacio() == 4) {
+                sb.append("|                      " + a.getFechaAdquisicion() + "                      |\n");
+            }
+        }
+
+        for (int i = 0; i < la.size(); i++) {
+            Articulo a = la.get(i);
+
+            if (a.getEspacio() == 1) {
+                sb.append(String.format("|         %8s           |\n", a.getPrecio()));
+            } else if (a.getEspacio() == 2) {
+                sb.append(String.format("|         %8s                 |\n", a.getPrecio()));
+            } else if (a.getEspacio() == 3) {
+                sb.append(String.format("|         %8s         |\n", a.getPrecio()));
+            } else if (a.getEspacio() == 4) {
+                sb.append(String.format("|         %8s           |\n", a.getPrecio()));
+            }
+        }
+
+        String impresion=sb.toString();
+        System.out.println(impresion);
+
+    }
 
     /**
      * Se inicializa y se llama al menu listados
@@ -332,7 +306,7 @@ public class MenuPrincipal {
             System.out.println("Estado del armario grabado correctamente");
             System.out.println(archivo);
         } catch (Exception e) {
-            System.out.println("Estado del armario no grabado");
+            System.out.println("Estado del armario no grabado: " + e.getMessage());
         }
     }
 

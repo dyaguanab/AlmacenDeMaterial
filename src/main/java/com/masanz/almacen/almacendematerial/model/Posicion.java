@@ -132,7 +132,8 @@ public class Posicion {
      * @return Muestra la concatenación de la fila con la columna ''
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder(fila);
+        StringBuilder sb = new StringBuilder();
+        sb.append(fila);
         sb.append(columna);
         return sb.toString();
     }

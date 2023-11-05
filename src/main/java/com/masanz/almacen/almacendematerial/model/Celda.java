@@ -161,26 +161,50 @@ public class Celda {
         return sb.toString();
     }
 
-//    public static void main(String[] args) {
-//        Celda c = new Celda(4);
-//
-//        LocalDate fecha = LocalDate.parse("2023-06-11");
-//
-//        Articulo a = new Articulo("MON1001",ETipoArticulo.MONITOR,3, fecha,1500.0);
-//        Articulo a1 = new Articulo("MON1002",ETipoArticulo.MONITOR,3, fecha,1500.0);
-//
-//        try {
-//            c.meter(a);
-//            c.meter(a);
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//
-//        try {
-//            c.meter(a);
-//            c.meter(a1);
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public static void main(String[] args) {
+        Celda c = new Celda(4);
+
+        LocalDate fecha = LocalDate.parse("2023-06-11");
+        LocalDate fecha1 = LocalDate.parse("2024-06-11");
+
+
+        Articulo a = new Articulo("MON1001",ETipoArticulo.MONITOR,2, fecha,1500.0);
+        Articulo a1 = new Articulo("MON1002",ETipoArticulo.MONITOR,2, fecha,1500.0);
+        Articulo a2 = new Articulo("MON1002",ETipoArticulo.CPU,1, fecha1,1000.0);
+        Articulo a3 = new Articulo("MON1009",ETipoArticulo.CPU,2, fecha1,1000.0);
+
+        try {
+            System.out.println("Espacio libre: " + c.getEspacioLibre());
+            System.out.println("Espacio ocupado: " + c.getEspacioOcupado());
+            System.out.print("Metiendo dos artículos iguales...");
+            c.meter(a1);
+            c.meter(a2);
+            System.out.println("Error");
+        }catch (Exception e){
+            System.out.println("OK: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("Espacio libre: " + c.getEspacioLibre());
+            System.out.println("Espacio ocupado: " + c.getEspacioOcupado());
+            System.out.print("Metiendo un artículo nuevo que entra... ");
+            c.meter(a);
+            System.out.println("OK");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            System.out.println("Espacio libre: " + c.getEspacioLibre());
+            System.out.println("Espacio ocupado: " + c.getEspacioOcupado());
+            System.out.print("Metiendo un artículo que no entra...");
+            c.meter(a3);
+            System.out.println("Metido y no entraba");
+        }catch (Exception e){
+            System.out.println("OK: " + e.getMessage());
+        }
+        System.out.println("Espacio libre: " + c.getEspacioLibre());
+        System.out.println("Espacio ocupado: " + c.getEspacioOcupado());
+
+    }
 }

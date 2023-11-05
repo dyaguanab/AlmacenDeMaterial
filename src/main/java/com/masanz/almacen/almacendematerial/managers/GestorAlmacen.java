@@ -52,7 +52,7 @@ public class GestorAlmacen {
      * en caso negativo devuelve false
      * @throws Exception lanza una excepción
      */
-    public boolean meterArticulo(Articulo a) throws Exception{
+    public boolean meterArticulo(Articulo a) throws ExcepcionAmi{
         Posicion p= armario.buscarPosicionConEspacio(a.getEspacio());
         if (p!= null){
             armario.meter(p,a);
@@ -95,12 +95,20 @@ public class GestorAlmacen {
         return armario.existeIdArticulo(s);
     }
 
+    /**
+     * Se hace un StringBuilder en el que se busca la dirección en donde guardar el archivo csv
+     * y se personaliza la manera en la que va a ser guardada la dirección del archivo, después
+     * 3 bucles anidados en el que con las caracteristicas de armario, filas, columnas se van guardando
+     * de la manera deseada
+     * @return la información del contenido del archivo
+     * @throws FileNotFoundException
+     */
     public String saveCsv() throws FileNotFoundException {
         StringBuilder sb= new StringBuilder(System.getProperty("user.dir"));
         sb.append("\\backup\\ami_");
         sb.append(LocalDate.now().toString());
         sb.append("_");
-        sb.append(LocalTime.now().toString());
+        sb.append(LocalTime.now().toString().replaceAll(":","").substring(0,6));
         sb.append(".csv");
 
         String archivo= sb.toString();

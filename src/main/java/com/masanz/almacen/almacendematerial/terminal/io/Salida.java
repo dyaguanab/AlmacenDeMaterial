@@ -30,16 +30,24 @@ public class Salida {
         mL.run();
     }
 
+    /** Estos metodos a la final serían hacer para dividir el contenido de los metodos y que no se vea un método grande.
+     * Divide y vencerás. Se pueden usar o no.
     public static void mostrarOpciones(String[] s){}
 
 
     public static void mostrarError(){}
 
-    public static void mostrarMensaje(String string){}
+    public static void mostrarMensaje(String string){
 
-    public static void mostrarArticulo(Articulo articulo, String string){}
+    }
 
-    public static void mostrarArticulosCelda(Articulo[] articulos, int articulo){}
+    public static void mostrarArticulo(Articulo articulo, String string){
+
+    }
+
+    public static void mostrarArticulosCelda(Articulo[] articulos, int articulo){
+
+    }
 
     public static void tablaArmario(Armario armario){}
 
@@ -59,4 +67,5 @@ public class Salida {
     public static void main(String[] args) {
 
     }
+     **/
 }
